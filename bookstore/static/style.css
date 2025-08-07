@@ -1,0 +1,70 @@
+body {
+    font-family: sans-serif;
+    margin: 0;
+    padding: 0;
+    background: #a3886f;
+}
+
+header {
+    background: #382c21;
+    color: white;
+    padding: 10px;
+}
+
+nav a {
+    color: rgb(0, 0, 0);
+    margin-right: 10px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+main {
+    padding: 20px;
+    background: #d4b08e;
+    max-width: 800px;
+    margin: 20px auto;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+footer {
+    text-align: center;
+    padding: 10px;
+    font-size: 0.9em;
+    color: #888;
+}
+
+.messages li {
+    list-style: none;
+    padding: 8px;
+    margin: 5px 0;
+    border-radius: 4px;
+}
+
+.success { background: #3ff57c71; color: #155724; }
+.error { background: #f73d4d7c; color: #721c24; }
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th {
+    background-color: #f0f0f0;
+    text-align: left;
+}
+
+td, th {
+    padding: 10px;
+    border: 1px solid #ccc;
+}
+
+.expired {
+    color: red;
+    font-weight: bold;
+}
+
+.active {
+    color: green;
+}
+

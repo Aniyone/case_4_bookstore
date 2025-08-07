@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>{{ book.title }}</h2>
+<p><strong>Автор:</strong> {{ book.author }}</p>
+<p><strong>Год:</strong> {{ book.year }}</p>
+<p><strong>Категория:</strong> {{ book.category }}</p>
+<p><strong>Цена:</strong> {{ book.price }}</p>
+<p><strong>Доступна: {{ 'Да' if book.available else 'Нет' }}</strong></p>
+
+{% if form %}
+    <h3>Арендовать</h3>
+  <form method="POST">
+    {{ form.hidden_tag() }}
+    {{ form.duration.label }} {{ form.duration() }}
+    {{ form.submit() }}
+  </form>
+{% else %}
+  <p style="color: gray; font-style: italic;">Эта книга временно недоступна для аренды.</p>
+{% endif %}
+{% endblock %}

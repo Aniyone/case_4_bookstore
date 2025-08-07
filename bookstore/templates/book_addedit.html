@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>{{ 'Редактировать' if book else 'Добавить' }} книгу</h2>
+<form method="POST">
+    {{ form.hidden_tag() }}
+    <p> {{ form.title() }} Название</p>
+    <p> {{ form.author() }} Автор</p>
+    <p> {{ form.category() }} Категория</p>
+    <p> {{ form.year() }} Год выхода</p>
+    <p> {{ form.price() }} Цена</p>
+    <p> {{ form.available() }} Доступна</p>
+    <p>
+        {% if book %}
+        <button type="submit">Обновить книгу</button>
+    <p>
+        {% else %}
+        <button type="submit">Добавить книгу</button></p>
+        {% endif %}</p>
+</form>
+{% endblock %}

@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Напоминания об аренде</h2>
+
+{% if expired_rentals %}
+    <h3>Просроченные аренды</h3>
+    <table border="1" cellpadding="6">
+        <thead>
+            <tr>
+                <th>Книга</th>
+                <th>Начало аренды</th>
+                <th>Окончание аренды</th>
+                <th>Статус</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for rental in expired_rentals %}
+            <tr>
+                <td>{{ rental.book.title }}</td>
+                <td>{{ rental.start_date.strftime('%d.%m.%Y') }}</td>
+                <td>{{ rental.end_date.strftime('%d.%m.%Y') }}</td>
+                <td class="expired">Просрочена</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% else %}
+    <p>Нет просроченных аренд.</p>
+{% endif %}
+
+<hr>
+
+<h3>Арендованные книги</h3>
+
+{% if active_rentals %}
+    <table border="1" cellpadding="6">
+        <thead>
+            <tr>
+                <th>Книга</th>
+                <th>Начало аренды</th>
+                <th>Окончание аренды</th>
+                <th>Статус</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for rental in active_rentals %}
+            <tr>
+                <td>{{ rental.book.title }}</td>
+                <td>{{ rental.start_date.strftime('%d.%m.%Y') }}</td>
+                <td>{{ rental.end_date.strftime('%d.%m.%Y') }}</td>
+                <td class="active">Активна</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% else %}
+    <p>Нет текущих аренд.</p>
+{% endif %}
+
+{% endblock %}

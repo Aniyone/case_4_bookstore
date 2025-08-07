@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Каталог книг</h2>
+
+<h4>Категории:</h4>
+<div>
+    {% for cat in categories %}
+        <a href="{{ url_for('user_dashboard', category=cat, author=selected_author, year=selected_year) }}">
+            {{ cat }}
+        </a>,
+    {% endfor %}
+    <br>
+</div>
+<h4>Авторы:</h4>
+<div>
+    {% for auth in authors %}
+        <a href="{{ url_for('user_dashboard', author=auth, category=selected_category, year=selected_year) }}">
+            {{ auth }}
+        </a>,
+    {% endfor %}
+    <br>
+</div>
+<h4>Год выпуска:</h4>
+<div>
+    {% for y in years %}
+        <a href="{{ url_for('user_dashboard', year=y, category=selected_category, author=selected_author) }}">
+            {{ y }}
+        </a>,
+    {% endfor %}
+    <br>
+    <br>
+    <br>
+    <small><a href="{{ url_for('user_dashboard') }}">Сбросить фильтры</a></small>
+</div>
+
+<hr>
+
+<h3>Книги:</h3>
+{% if books %}
+    <ul>
+    {% for book in books %}
+        <li>
+            <a href="{{ url_for('book_detail', book_id=book.id) }}">
+                <strong>{{ book.title }}</strong>
+            </a> — {{ book.author }}, {{ book.year }}, {{ book.category }}
+        </li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>Книги не найдены.</p>
+{% endif %}
+
+{% endblock %}

@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Список аренд</h2>
+
+<table border="1" cellpadding="6">
+    <thead>
+        <tr>
+            <th>Пользователь</th>
+            <th>Книга</th>
+            <th>Начало аренды</th>
+            <th>Окончание аренды</th>
+            <th>Статус</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for rental in rentals %}
+        <tr>
+            <td>{{ rental.user.username }}</td>
+            <td>{{ rental.book.title }}</td>
+            <td>{{ rental.start_date.strftime('%d.%m.%Y') }}</td>
+            <td>{{ rental.end_date.strftime('%d.%m.%Y') }}</td>
+            <td class="{{ 'expired' if rental.is_expired() else 'active' }}">
+                {{ 'Просрочена' if rental.is_expired() else 'Активна' }}
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
