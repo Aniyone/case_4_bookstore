@@ -9,12 +9,16 @@
 
 {% if form %}
     <h3>Арендовать</h3>
-  <form method="POST">
-    {{ form.hidden_tag() }}
-    {{ form.duration.label }} {{ form.duration() }}
-    {{ form.submit() }}
-  </form>
+    <form method="POST">
+        {{ form.hidden_tag() }}
+        {{ form.duration.label }} {{ form.duration() }}
+        {{ form.submit() }}
+    </form>
+    <form action="{{ url_for('purchase_book', book_id=book.id) }}" method="POST">
+        <button type="submit" class="btn btn-success">Купить книгу</button>
+    </form>
+
 {% else %}
-  <p style="color: gray; font-style: italic;">Эта книга временно недоступна для аренды.</p>
+  <p style="color: gray; font-style: italic;">Эта книга временно недоступна.</p>
 {% endif %}
 {% endblock %}

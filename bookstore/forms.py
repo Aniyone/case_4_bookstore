@@ -22,9 +22,9 @@ class BookForm(FlaskForm):
     submit = SubmitField('Обновить книгу')
 
 class RentalForm(FlaskForm):
-    duration = SelectField('Rental Duration', choices=[
-        ('14', '2 Weeks'),
-        ('30', '1 Month'),
-        ('90', '3 Months')
+    duration = SelectField('Время аренды', choices=[
+        ('14', '2 недели'),
+        ('30', '1 месяц'),
+        ('90', '3 месяца')
     ])
-    submit = SubmitField('Rent Book')
+    submit = SubmitField('Арендовать')

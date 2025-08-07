@@ -35,3 +35,9 @@ class Rental(db.Model):
 
     def is_expired(self):
         return datetime.utcnow() > self.end_date
+
+class Purchase(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    book_id = db.Column(db.Integer, db.ForeignKey('book.id'), nullable=False)
+    purchase_date = db.Column(db.DateTime, default=datetime.utcnow)

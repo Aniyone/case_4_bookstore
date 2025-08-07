@@ -1,7 +1,7 @@
 from flask import render_template, redirect, url_for, flash, request
 from bookstore import app, db
 from bookstore.forms import RegistrationForm, LoginForm, BookForm, RentalForm
-from bookstore.models import User, Book, Rental
+from bookstore.models import User, Book, Rental, Purchase
 from flask_login import login_user, current_user, logout_user, login_required
 from werkzeug.security import generate_password_hash, check_password_hash
 from datetime import datetime, timedelta
@@ -134,7 +134,6 @@ def book_detail(book_id):
     book = Book.query.get_or_404(book_id)
 
     if not book.available:
-        flash('Эта книга сейчас недоступна для аренды.', 'warning')
         return render_template('book_detail.html', book=book, form=None)
     form = RentalForm()
     if form.validate_on_submit():
@@ -173,6 +172,20 @@ def admin_rentals():
     
     all_rentals = Rental.query.order_by(Rental.end_date.desc()).all()
     return render_template('admin_reminders.html', rentals=all_rentals)
+
+@app.route('/purchase/<int:book_id>', methods=['POST'])
+@login_required
+def purchase_book(book_id):
+    book = Book.query.get_or_404(book_id)
+    existing_purchase = Purchase.query.filter_by(user_id=current_user.id, book_id=book.id).first()
+    if existing_purchase:
+        flash('Вы уже купили эту книгу.', 'info')
+        return redirect(url_for('book_detail', book_id=book.id))
+    purchase = Purchase(user_id=current_user.id, book_id=book.id)
+    db.session.add(purchase)
+    db.session.commit()
+    flash('Книга куплена!', 'success')
+    return redirect(url_for('user_dashboard'))
 
 
 @app.before_request
